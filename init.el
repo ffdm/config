@@ -59,7 +59,7 @@
  '(package-selected-packages
    '(command-log-mode counsel-projectile doom-modeline doom-themes
 		      evil-collection evil-magit general helpful hydra
-		      ivy-rich magit rainbow-delimiters)))
+		      ivy-rich magit org-bullets rainbow-delimiters)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -180,3 +180,14 @@
 ;  :config (counsel-projectile-mode))
 
 (use-package magit)
+
+; configure github token for forge
+; (use-package forge)
+; forge lets you do PRs, view and respond to issues in emacs instead of github website
+
+(use-package org
+  :config
+  (setq org-ellipsis " ▾"))
+
+(use-package org-bullets
+  :after org)
