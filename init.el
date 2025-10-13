@@ -9,7 +9,13 @@
 
 (setq visible-bell t)
 
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'control))
+
 (set-face-attribute 'default nil :height 130)
+
+(when (eq system-type 'darwin)
+    (set-face-attribute 'default nil :height 200))
 
 (column-number-mode t)
 (global-display-line-numbers-mode t)
@@ -57,8 +63,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(command-log-mode counsel-projectile doom-modeline doom-themes
-		      evil-collection evil-magit general helpful hydra
+   '(command-log-mode doom-modeline doom-themes
+		      evil-collection general helpful hydra
 		      ivy-rich magit org-bullets rainbow-delimiters)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -110,12 +116,17 @@
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal))
+  (evil-set-initial-state 'dashboard-mode 'normal)
+
+  (add-hook 'git-commit-mode-hook #'evil-insert-state)
+)
   
 (use-package evil-collection
   :after evil
   :config
-  (evil-collection-init))
+  (evil-collection-init)
+  (evil-define-key 'normal org-mode-map (kbd "M-<return>") 'org-meta-return)
+  )
 
 (use-package counsel
   :bind(("M-x" . counsel-M-x)
@@ -187,7 +198,9 @@
 
 (use-package org
   :config
-  (setq org-ellipsis " ▾"))
+  (setq org-ellipsis " ▾")
+  (setq org-M-RET-may-split-line nil))
+
 
 (use-package org-bullets
   :after org)
