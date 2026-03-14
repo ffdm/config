@@ -36,8 +36,8 @@ set encoding=utf-8
 " Whitespace
 set wrap
 set textwidth=79
-set formatoptions=qn1
-set tabstop=2
+set textwidth=79
+set formatoptions=tcqrn1
 set shiftwidth=2
 set softtabstop=2
 set expandtab
@@ -107,3 +107,6 @@ let g:solarized_termtrans=1
 
 vnoremap <C-c> "+y 
 map <C-v> "+p
+\n" Use macOS system clipboard by default\nset clipboard=unnamed
+
+set directory=$HOME/.vim/swapfiles/
